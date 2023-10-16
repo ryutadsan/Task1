@@ -1,12 +1,12 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import cv2
-from PIL import Image
+
 
 def show_image(org_img , msk_img):
     # Masking original image
     result_img = cv2.bitwise_and(msk_img,org_img,)
+    result_img = cv2.cvtColor(result_img, cv2.COLOR_RGB2BGR)
     cv2.imshow("image",result_img) # Showing image
     cv2.waitKey(0) #Wait key apply 
     cv2.destroyAllWindows() # Close all windows
@@ -17,6 +17,7 @@ def prosessing_image(input_image):
     imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     # Image binalization
     ret,thresh = cv2.threshold(imgray,110,255,cv2.THRESH_BINARY)
+    
     #District prosess area
     xmin ,xmax = 44, 224
     ymin , ymax = 110 , 216
